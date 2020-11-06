@@ -1,9 +1,10 @@
 import {Router} from 'express'
-import {user} from '../controllers/user.controller'
+import {getUsers, createUser} from '../controllers/user.controller'
 
 const router = Router()
 
 router.route('/')
-    .get(user)
-
+    .get(getUsers)
+    .post(createUser)
+    
 export default router

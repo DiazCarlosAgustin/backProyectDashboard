@@ -10,11 +10,16 @@ export class App{
     constructor(private port?: number | string){
         this.app = express()
         this.settings();
+        this.middleware();
         this.routes();
     }
 
     settings(){
         this.app.set('port', this.port || process.env.PORT || 3000)
+    }
+
+    middleware(){
+        this.app.use(express.json())
     }
 
     routes(){
