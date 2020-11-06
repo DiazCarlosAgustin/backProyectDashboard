@@ -1,10 +1,11 @@
 import {createPool} from 'mysql2/promise'
 
-function connet(){
-    createPool({
+export async function connet(){
+    const connection = await createPool({
         database:'dashboard',
         host:'127.0.0.1',
-        port:3360,
         user:'root',
+        connectionLimit: 10
     })
+    return connection
 }
