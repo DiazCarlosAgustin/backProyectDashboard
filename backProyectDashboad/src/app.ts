@@ -1,5 +1,6 @@
 import express from 'express'; 
-
+import {createConnection} from 'typeorm'
+import 'reflect-metadata'
 // routes
 import indexRouter from './routes/index.route'
 import userRouter from './routes/user.router'
@@ -12,6 +13,7 @@ export class App{
         this.settings();
         this.middleware();
         this.routes();
+        createConnection()
     }
 
     settings(){

@@ -4,6 +4,6 @@
     "port": 3306,
     "username": "root",
     "database": "dashboard",
-    "entities": ["src/bar/entity/**/*.ts"],
+    "entities": ["src/entity/*.ts"],
     "synchronize": true
  }
