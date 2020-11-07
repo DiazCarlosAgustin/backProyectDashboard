@@ -5,6 +5,7 @@ const router = Router()
 
 router.route('/')
     .get(getUsers)
+router.route('/register')
     .post(createUser)
     
 export default router

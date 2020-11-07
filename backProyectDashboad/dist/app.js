@@ -14,14 +14,36 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.App = void 0;
 const express_1 = __importDefault(require("express"));
+const cors_1 = __importDefault(require("cors"));
+require("reflect-metadata");
+const typeorm_1 = require("typeorm");
+// routes
+const index_route_1 = __importDefault(require("./routes/index.route"));
+const user_router_1 = __importDefault(require("./routes/user.router"));
 class App {
-    constructor() {
+    constructor(port) {
+        this.port = port;
         this.app = express_1.default();
+        this.settings();
+        this.middleware();
+        this.routes();
+        typeorm_1.createConnection();
+    }
+    settings() {
+        this.app.set('port', this.port || process.env.PORT || 3000);
+    }
+    middleware() {
+        this.app.use(express_1.default.json());
+        this.app.use(cors_1.default());
+    }
+    routes() {
+        this.app.use(index_route_1.default);
+        this.app.use('/user/', user_router_1.default);
     }
     listen() {
         return __awaiter(this, void 0, void 0, function* () {
-            yield this.app.listen(3000);
-            console.log("server on port " + 3000);
+            yield this.app.listen(this.app.get('port'));
+            console.log("server on port ", this.app.get('port'));
         });
     }
 }
