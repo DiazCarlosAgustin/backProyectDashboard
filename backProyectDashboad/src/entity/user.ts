@@ -1,6 +1,8 @@
-import {Entity, Column, PrimaryGeneratedColumn} from  'typeorm'
+import {Entity, Column, PrimaryGeneratedColumn,Unique, CreateDateColumn, UpdateDateColumn} from  'typeorm'
+import * as bcrypt from 'bcrypt'
 
 @Entity("user")
+@Unique(["email"])
 export class user{
     @PrimaryGeneratedColumn()
     id: number;
@@ -18,5 +20,17 @@ export class user{
     telefono: string;
 
     @Column()
-    password: string
+    password: string;
+
+    @Column()
+    @CreateDateColumn()
+    createdAt: Date;
+
+    @Column()
+    @UpdateDateColumn()
+    updatedAt: Date;
+
+    comparePassword(unencryptedPassword: string) {
+        return bcrypt.compareSync(unencryptedPassword, this.password);
+      }
 }

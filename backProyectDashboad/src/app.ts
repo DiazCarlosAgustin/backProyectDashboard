@@ -4,6 +4,7 @@ import 'reflect-metadata'
 // routes
 import indexRouter from './routes/index.route'
 import userRouter from './routes/user.router'
+import authRouter from './routes/auth'
 
 export class App{
     app: express.Application
@@ -27,6 +28,7 @@ export class App{
     routes(){
         this.app.use(indexRouter)
         this.app.use('/user/',userRouter)
+        this.app.use('/auth/',authRouter)
     }
 
     async listen(){
