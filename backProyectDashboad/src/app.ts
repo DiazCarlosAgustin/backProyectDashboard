@@ -5,7 +5,7 @@ import 'reflect-metadata'
 import indexRouter from './routes/index.route'
 import userRouter from './routes/user.router'
 import authRouter from './routes/auth'
-
+test
 export class App{
     app: express.Application
 
